@@ -44,10 +44,11 @@ function SearchBar() {
         No Search Results Yet!, Please submit a search above!
       </div>
 
-      {results.map(({ etag, snippet }) => {
+      {results.map(({ etag, snippet, id }) => {
+        const videoId = id.videoId;
         return (
           <div key={etag} className="card" style={{ width: "18rem" }}>
-            <Link to="/videos">
+            <Link to={`/videos/${videoId}`}>
               <img
                 src={snippet.thumbnails.high.url}
                 className="card-img-top"
