@@ -1,12 +1,12 @@
 import React from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function NavBar() {
   return (
     <div className="navBar">
-      <nav className="navbar navbar-expand-lg ">
+      <nav className="navbar navbar-expand ">
         <div className="container-fluid">
-          <a className="navbar-brand text-white" href="">
+          <a className="navbar-brand text-white" href="/">
             YouTube
           </a>
           <button
