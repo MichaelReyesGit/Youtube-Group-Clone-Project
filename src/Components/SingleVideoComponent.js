@@ -6,9 +6,8 @@ function SingleVideoComponent() {
   const { id } = useParams();
 
   return (
-    <div>
-      <h1>Ariana Grande</h1>
-      <div>
+    <div className="d-flex justify-content-center mt-5 ">
+      <div className="">
         <YouTube videoId={id} />
       </div>
     </div>
