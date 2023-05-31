@@ -51,6 +51,7 @@ function About() {
               <a
                 href="https://www.linkedin.com/in/michael-reyes-ny/"
                 target="_blank"
+                rel="noreferrer"
                 className="btn btn-outline-danger"
                 type="button"
               >
@@ -59,6 +60,7 @@ function About() {
               <a
                 href="https://github.com/MichaelReyesGit"
                 target="_blank"
+                rel="noreferrer"
                 className="btn btn-outline-danger mx-2"
                 type="button"
               >
@@ -103,6 +105,7 @@ function About() {
               <a
                 href="https://www.linkedin.com/in/jameel-ibrahim-8a7a6b155/"
                 target="_blank"
+                rel="noreferrer"
                 className="btn btn-outline-danger"
                 type="button"
               >
@@ -111,6 +114,7 @@ function About() {
               <a
                 href="https://github.com/Jameel914"
                 target="_blank"
+                rel="noreferrer"
                 className="btn btn-outline-danger mx-2"
                 type="button"
               >
@@ -159,6 +163,7 @@ function About() {
               <a
                 href="https://www.linkedin.com/in/luis-garcia-silva/"
                 target="_blank"
+                rel="noreferrer"
                 className="btn btn-outline-danger"
                 type="button"
               >
@@ -167,6 +172,7 @@ function About() {
               <a
                 href="https://www.linkedin.com/in/luis-garcia-silva/"
                 target="_blank"
+                rel="noreferrer"
                 className="btn btn-outline-danger mx-2"
                 type="button"
               >
