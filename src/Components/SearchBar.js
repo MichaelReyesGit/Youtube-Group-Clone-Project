@@ -1,66 +1,67 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { NavLink, Link } from "react-router-dom";
+import SearchResults from "./SearchResults";
+import Modal from "./Modal";
 
 function SearchBar() {
   const [results, setResults] = useState([]);
   const [search, setSearch] = useState("");
+  const [modal, setModal] = useState(false);
+  const [alert, setAlert] = useState(true);
 
-  let API = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&type=video&q=${search}&key=AIzaSyCdlC9flaUqKX9b2g9lbIzb4Us0PcEU7nQ&maxResults=25`;
-
+  let URL = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&type=video&q=${search}&key=AIzaSyCdlC9flaUqKX9b2g9lbIzb4Us0PcEU7nQ&maxResults=25`;
   async function handleFetch() {
     try {
-      let result = await axios.get(API);
+      let result = await axios.get(URL);
 
-      setResults(result.data.items);
+      if (search === "") {
+        setModal(true);
+      } else {
+        setResults(result.data.items);
+        setAlert(false);
+      }
     } catch (e) {
+      if (e.request.status >= 400) {
+        setModal(true);
+        console.log("bad request");
+      }
       console.log(e);
     }
   }
-
   return (
-    <div className="search-container">
-      <div className="input-group">
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleFetch();
+    <div className="search-container container mt-5">
+      <form
+        className="input-group"
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleFetch(e);
+          setSearch("");
+        }}
+      >
+        <input
+          onChange={(e) => {
+            setSearch(e.target.value);
           }}
-        >
-          <input
-            onChange={(e) => setSearch(e.target.value)}
-            type="search"
-            className="form-control rounded"
-            placeholder="Search..."
-            aria-label="Search"
-            aria-describedby="search-addon"
-          />
-          <button type="button" className="btn btn-outline-primary">
-            search
-          </button>
-        </form>
-      </div>
-      <div className="alert alert-light" role="alert">
-        No Search Results Yet!, Please submit a search above!
-      </div>
+          type="sarch"
+          className="form-control rounded"
+          placeholder="Search..."
+          aria-label="Search"
+          aria-describedby="search-addon"
+          value={search}
+        />
+        <button type="submit" className="btn btn-danger px-5">
+          Search
+        </button>
+      </form>
 
-      {results.map(({ etag, snippet, id }) => {
-        const videoId = id.videoId;
-        return (
-          <div key={etag} className="card" style={{ width: "18rem" }}>
-            <Link to={`/videos/${videoId}`}>
-              <img
-                src={snippet.thumbnails.high.url}
-                className="card-img-top"
-                alt={snippet.channelTitle}
-              />
-              <div className="card-body">
-                <h2 className="card-text">{snippet.title}</h2>
-              </div>
-            </Link>
-          </div>
-        );
-      })}
+      {alert && (
+        <div className="alert alert-dark mt-4" role="alert">
+          No Search Results Yet! Please submit a search above!
+        </div>
+      )}
+      <SearchResults results={results} />
+
+      {modal && <Modal setModal={setModal} />}
     </div>
   );
 }
